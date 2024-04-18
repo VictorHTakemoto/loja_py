@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'carrinho.apps.CarrinhoConfig',
+    'pedidos.apps.PedidosConfig',
 ]
+
+ID_CARRINHO = 'carrinho'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -63,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'carrinho.context_processors.carrinho',
             ],
         },
     },
@@ -79,7 +84,7 @@ WSGI_APPLICATION = 'lojavirtual.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'loja_virtual_py',
+        'NAME': 'ljv_django',
         'USER': 'sa',
         'PASSWORD': 'Pass1234',
         'HOST': 'DESKTOP-P5888CV\\SQLEXPRESS',
@@ -122,7 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -130,9 +135,9 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'upload')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'imagens-produtos')
 
-MEDIA_URL = '/upload/'
+MEDIA_URL = '/media/'
 
 # Log Config
 
@@ -169,3 +174,9 @@ LOGGING = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_FALE_CONOSCO = 'victor_takemoto@outlook.com'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

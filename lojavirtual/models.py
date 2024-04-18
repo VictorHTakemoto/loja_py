@@ -1,20 +1,20 @@
 from django.db import models
 from django.urls import reverse
+from lojavirtual import settings
 #Create your models here.
+
 class Categoria(models.Model):
     nome = models.CharField(max_length=150, db_index=True)
-    slug = models.SlugField(max_length=200, unique=True, db_index=True)
+    slug = models.SlugField(max_length=150, unique=True, db_index=True)
     data_criacao = models.DateTimeField(auto_now_add=True)
     data_ultima_atualizacao = models.DateTimeField(auto_now=True)
     class Meta:
         ordering = ('nome',)
         verbose_name = 'categoria'
         verbose_name_plural = 'categorias'
-    def __str__(self):
-        return self.nome
+        def __str__(self):
+            return self.nome
 
-    def get_absolute_url(self):
-        return reverse('main:listar_produtos_por_categoria', args=[self.slug])
 class Produto(models.Model):
     categoria = models.ForeignKey(Categoria, related_name='produtos', on_delete=models.CASCADE)
     nome = models.CharField(max_length=100, db_index=True)
@@ -29,8 +29,5 @@ class Produto(models.Model):
     class Meta:
         ordering = ('nome',)
         index_together = (('id', 'slug'),)
-    def __str__(self):
-        return self.nome
-    def get_absolute_url(self):
-        return reverse('main:detalhes_produto', args=[str(self.id), self.slug])
-
+        def __str__(self):
+            return self.nome
