@@ -1,4 +1,6 @@
 from decimal import Decimal
+from urllib import request
+
 from django.conf import settings
 from main.models import Produto
 class Carrinho:
